@@ -17,8 +17,8 @@ export class FotoService {
     }
     constructor(private service: HttpClient) { }
 
-    listar(): Observable<Object> {
-        return this.service.get(this.url);
+    listar(): Observable<FotoComponent[]> {
+        return this.service.get<FotoComponent[]>(this.url);
     }
     cadastrar(foto: FotoComponent): Observable<Object> {
         return this.service.post(this.url, foto, this.cabecalho);
