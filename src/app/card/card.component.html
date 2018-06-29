@@ -1,0 +1,8 @@
+<div class="card">
+    <foto [url]="foto.url" [titulo]="foto.titulo"></foto>
+    <div class="card-body">
+      <h5 class="card-title">{{foto.titulo}}</h5>
+      <div class="card-text">{{foto.descricao}}</div>
+      <ng-content></ng-content>
+    </div>
+  </div>
