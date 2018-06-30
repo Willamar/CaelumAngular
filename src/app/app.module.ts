@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListagemComponent } from './listagem/listagem.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { ModuloRoteamento } from './app.route';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MensagemComponent } from './mensagem/mensagem.component';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { MensagemComponent } from './mensagem/mensagem.component';
     CardModule,
     FotoModule,
     ModuloRoteamento,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

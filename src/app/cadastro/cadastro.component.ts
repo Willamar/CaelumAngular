@@ -3,6 +3,7 @@ import { MensagemComponent } from './../mensagem/mensagem.component';
 import { Component, OnInit } from '@angular/core';
 import { FotoComponent } from '../foto/foto.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,13 +13,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CadastroComponent implements OnInit {
   foto = new FotoComponent;
   mensagem = new MensagemComponent();
+  formCadastro: FormGroup // propriedade do tipo formulario
 
   constructor(
     private service: FotoService,
     private rotaAtiva: ActivatedRoute,
-    private roteador: Router) {
+    private roteador: Router,
+    private formBuilder: FormBuilder) {
+    this.formCadastro = this.formBuilder.group({
+      titulo: ["", Validators.compose([
+        Validators.required,
+        Validators.minLength(5)
+      ])],
+      url: ["", Validators.required],
+      descricao: ""
+    });
+  }
 
-
+  ngOnInit() {
     //snapshot
     let fotoId = this.rotaAtiva.snapshot.params.fotoId;
     if (fotoId) {
@@ -32,9 +44,6 @@ export class CadastroComponent implements OnInit {
     //     (fotoApi) => this.foto = fotoApi
     //   );
     // });
-  }
-
-  ngOnInit() {
   }
 
   salvar() {
@@ -59,6 +68,10 @@ export class CadastroComponent implements OnInit {
           () => {
             this.mensagem.texto = `${this.foto.titulo} Cadastrado com sucesso`;
             this.mensagem.tipo = "success";
+
+            setTimeout(() => {
+              this.roteador.navigate([""]);
+            }, 3000);
           },
           erro => {
             this.apresentarErroMensagem(erro);

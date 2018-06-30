@@ -10,18 +10,19 @@
 
 
   <div class="row">
-    <form #formCadastro="ngForm" (ngSubmit)="salvar()" class="col-md-5 offset-md-2">
+    <form [formGroup]="formCadastro" (ngSubmit)="salvar()" class="col-md-5 offset-md-2">
       <div class="form-group">
         <label for="">Titulo</label>
-        <input [(ngModel)]="foto.titulo" name="titulo" type="text" class="form-control" required>
+        <input [(ngModel)]="foto.titulo" formControlName="titulo" type="text" class="form-control">
+        <app-mensagem texto="" tipo=""></app-mensagem>
       </div>
       <div class="form-group">
         <label for="">URL</label>
-        <input [(ngModel)]="foto.url" name="url" type="text" class="form-control" required>
+        <input [(ngModel)]="foto.url" formControlName="url" type="text" class="form-control">
       </div>
       <div class="form-group">
         <label for="">Descrição</label>
-        <textarea [(ngModel)]="foto.descricao" name="descricao" type="text" class="form-control"></textarea>
+        <textarea [(ngModel)]="foto.descricao" formControlName="descricao" type="text" class="form-control"></textarea>
       </div>
 
       <div class="row">
