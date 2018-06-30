@@ -7,13 +7,14 @@
       <app-mensagem [texto]="mensagem.texto" [tipo]="mensagem.tipo"></app-mensagem>
     </div>
   </div>
-  <div class="row mb-4">
-    <div class="col-md-12">
+  <form class="input-group">
+    <span>
       <a routerLink="/cadastro" class="btn btn-primary">Nova foto</a>
-    </div>
-  </div>
+    </span>
+    <input (keyup)="true" #inputBusca type="search" class="form-control" />
+  </form>
   <div class="row">
-    <app-card *ngFor="let foto of listaFoto" [foto]="foto" class="col-md-3">
+    <app-card *ngFor="let foto of listaFoto | filtroPorTitulo:inputBusca.value" [foto]="foto" class="col-md-3">
       <button (click)="apagar(foto)" class="btn btn-danger">Apagar foto</button>
       <a [routerLink]="['/cadastro', foto._id]" class="btn btn-primary">Editar</a>
     </app-card>

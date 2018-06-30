@@ -13,16 +13,20 @@
     <form [formGroup]="formCadastro" (ngSubmit)="salvar()" class="col-md-5 offset-md-2">
       <div class="form-group">
         <label for="">Titulo</label>
-        <input [(ngModel)]="foto.titulo" formControlName="titulo" type="text" class="form-control">
-        <app-mensagem texto="" tipo=""></app-mensagem>
+        <input formControlName="titulo" type="text" class="form-control">
+        <div *ngIf="formCadastro.controls.titulo.errors && formCadastro.controls.titulo.touched">
+          <app-mensagem *ngIf="formCadastro.controls.titulo.errors.required" texto="Titulo é obrigatorio" tipo="danger"></app-mensagem>
+          <app-mensagem *ngIf="formCadastro.controls.titulo.errors.minlength" texto="Mínimo é de {{formCadastro.controls.titulo.errors.minlength.requiredLength}} caracteres"
+            tipo="danger"></app-mensagem>
+        </div>
       </div>
       <div class="form-group">
         <label for="">URL</label>
-        <input [(ngModel)]="foto.url" formControlName="url" type="text" class="form-control">
+        <input formControlName="url" type="text" class="form-control">
       </div>
       <div class="form-group">
         <label for="">Descrição</label>
-        <textarea [(ngModel)]="foto.descricao" formControlName="descricao" type="text" class="form-control"></textarea>
+        <textarea formControlName="descricao" type="text" class="form-control"></textarea>
       </div>
 
       <div class="row">

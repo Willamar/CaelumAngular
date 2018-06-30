@@ -1,3 +1,4 @@
+import { FiltroPorTitulo } from './listagem/filtroPorTitulo.pipe';
 import { FotoModule } from './foto/foto.module';
 import { CardModule } from './card/card.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +17,8 @@ import { MensagemComponent } from './mensagem/mensagem.component';
     AppComponent,
     ListagemComponent,
     CadastroComponent,
-    MensagemComponent
+    MensagemComponent,
+    FiltroPorTitulo
   ],
   imports: [
     BrowserModule,

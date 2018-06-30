@@ -35,7 +35,13 @@ export class CadastroComponent implements OnInit {
     let fotoId = this.rotaAtiva.snapshot.params.fotoId;
     if (fotoId) {
       this.service.pesquisar(fotoId).subscribe(
-        (fotoApi) => this.foto = fotoApi
+        (fotoApi) => {
+          this.foto = fotoApi;
+          // this.formCadastro.get("titulo").setValue(fotoApi.titulo);
+          // this.formCadastro.get("url").setValue(fotoApi.url);
+          // this.formCadastro.get("descricao").setValue(fotoApi.descricao);
+          this.formCadastro.patchValue(fotoApi);
+        }
       );
     }
 
@@ -48,7 +54,12 @@ export class CadastroComponent implements OnInit {
 
   salvar() {
 
+    this.foto = { ...this.foto, ...this.formCadastro.value };
+
     if (this.foto._id) {
+      this.foto.titulo = this.formCadastro.get("titulo").value;
+      this.foto.url = this.formCadastro.get("url").value;
+      this.foto.descricao = this.formCadastro.get("descricao").value;
       this.service.alterar(this.foto).subscribe(
         () => {
           this.mensagem.texto = `${this.foto.titulo} alterado com sucesso`;
@@ -63,6 +74,9 @@ export class CadastroComponent implements OnInit {
           this.apresentarErroMensagem(erro);
         })
     } else {
+      this.foto.titulo = this.formCadastro.get("titulo").value;
+      this.foto.url = this.formCadastro.get("url").value;
+      this.foto.descricao = this.formCadastro.get("descricao").value;
       this.service.cadastrar(this.foto)
         .subscribe(
           () => {
